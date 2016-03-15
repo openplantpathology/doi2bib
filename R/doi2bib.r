@@ -1,10 +1,11 @@
 #' Convert doi to bibtex
 #'
-#' Convert a digital object identifier (doi) string into a bibtex entry using the
-#' webservice \link{http://www.doi2bib.org}.
+#' Convert a digital object identifier (doi) string into a bibtex entry using
+#' the webservice \link{http://www.doi2bib.org}.
 #'
 #' @param doi The character string of the doi.
-#' @param citekey Character string of equal length to \code{doi}. If used will replace citekeys with these values.
+#' @param citekey Character string of equal length to \code{doi}. If used will
+#'   replace citekeys with these values.
 #'
 #' @return a bibtex entry as a character string.
 #'
@@ -24,12 +25,38 @@ setGeneric(
 
 setMethod(
   "doi2bib",
-  c(doi = "character"),
+  c(doi = "character", citekey = "missing"),
   function(doi, citekey) {
 
-    if (!missing(citekey)) {
-      stopifnot(length(citekey) == length(doi))
-    }
+    refs <-
+      vapply(
+        doi,
+        function(doi) {
+          content(
+            GET(
+              url    = "http://www.doi2bib.org/",
+              config = accept("application/x-bibtex"),
+              path   = "doi2bib",
+              query  = list(id = doi)
+            ),
+            as = "text",
+            encoding = "UTF-8"
+          )
+        },
+        character(length(doi))
+      )
+
+    refs
+
+  }
+)
+
+setMethod(
+  "doi2bib",
+  c(doi = "character", citekey = "character"),
+  function(doi, citekey) {
+
+    stopifnot(length(citekey) == length(doi))
 
     refs <-
       vapply(
@@ -50,17 +77,13 @@ setMethod(
       )
 
     # replace the citekeys
-    if (!missing(citekey)) {
-      mapply(
-        function(refs, citekey) {
-         sub("([^\\{]+\\{)[^,]+", paste0("\\1", citekey), refs)
-        },
-        refs,
-        citekey
-      )
-    }
-
-    refs
+    mapply(
+      function(refs, citekey) {
+        sub("([^\\{]+\\{)[^,]+", paste0("\\1", citekey), refs)
+      },
+      refs,
+      citekey
+    )
 
   }
 )
