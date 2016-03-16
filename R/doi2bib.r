@@ -1,20 +1,27 @@
 #' Convert doi to bibtex
 #'
-#' Convert a digital object identifier (doi) string into a bibtex entry using
+#' Convert a digital object identifier (DOI) string into a bibtex entry using
 #' the webservice \url{http://www.doi2bib.org}.
 #'
-#' @param ... One or more character strings of the doi. If arguments are named, names will replace citekeys
-#' @param file an optional character string. If used the bibtex references are sent to file rather than returned.
-#' @param quiet logical. Should the bibtex references be printed to the console?
+#' @param ... One or more DOIs, as \code{character} strings. If arguments are
+#'   named, names will replace default citekeys.
+#' @param file an optional \code{character} string. If used, the bibtex
+#'   references are sent to \code{file} rather than being returned.
+#' @param quiet \code{logical}. By default, bibtex references are printed to the
+#'   console. By setting \code{quiet} to \code{TRUE}, this behaviour will be
+#'   prevented.
 #'
-#' @return a list, returned invisibly, of bibtex references as a character strings, unless a file is specified, in which case nothing is returned
+#' @return a \code{list}, returned invisibly, of bibtex references as
+#'   \code{character} strings, unless \code{file} is specified, in which case
+#'   the function returns \code{NULL} invisibly.
 #'
 #' @importFrom httr accept content GET
 #' @importFrom methods setGeneric setMethod signature
 #'
 #' @examples
 #' doi2bib(Margules2000 = "10.1038/35012251")
-#'
+#' doi2bib(Margules2000 = "10.1038/35012251",
+#'         Myers2000 = "10.1038/35002501")
 #' @export
 
 setGeneric(
@@ -25,7 +32,7 @@ setGeneric(
   signature = signature("...")
 )
 
-#'@describeIn doi2bib Convert doi to bibtex
+#'@describeIn doi2bib Convert DOI to bibtex
 setMethod(
   "doi2bib",
   "character",
