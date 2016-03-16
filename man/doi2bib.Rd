@@ -4,7 +4,7 @@
 \name{doi2bib}
 \alias{doi2bib}
 \alias{doi2bib,character-method}
-\title{Convert doi to bibtex}
+\title{Convert DOI to bibtex}
 \usage{
 doi2bib(..., file, quiet = FALSE)
 
@@ -32,7 +32,7 @@ the webservice \url{http://www.doi2bib.org}.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{character}: Convert doi to bibtex
+\item \code{character}: Convert DOI to bibtex
 }}
 \examples{
 doi2bib(Margules2000 = "10.1038/35012251")
