@@ -1,12 +1,12 @@
 Package: doi2bib
 Title: Convert DOI to Bibtex
-Version: 0.0.0.9007
+Version: 0.0.0.9008
 Authors@R:  c(
     person(c("William", "Keith"), "Morris", email = "wkmor1@gmail.com", role = c("aut", "cre")),
     person("John", "Baumgartner", email = "johnbaums@gmail.com", role = "aut")
     )
 Description: Convert a digital object identifier (doi) string into a bibtex entry using the webservice http://www.doi2bib.org}.
-Depends: R (>= 3.2.3)
+Depends: R (>= 3.1.3)
 Imports:
     httr,
     methods
