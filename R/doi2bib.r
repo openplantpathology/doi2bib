@@ -67,11 +67,11 @@ setMethod(
       refs <-
         mapply(
           function(ref, nm) {
-            if (nchar(nm) < 1) {
-              ref
-            } else {
+            ifelse(
+              nchar(nm) < 1,
+              ref,
               sub("([^\\{]+\\{)[^,]+", paste0("\\1", nm), ref)
-            }
+            )
           },
           refs,
           nms,
