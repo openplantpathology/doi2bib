@@ -1,5 +1,5 @@
 Package: doi2bib
-Title: Convert doi to bibtex
+Title: Convert DOI to Bibtex
 Version: 0.0.0.9005
 Authors@R: as.person(c(
     "William K. Morris <wkmor1@gmail.com> [aut, cre]",
