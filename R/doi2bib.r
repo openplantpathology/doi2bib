@@ -75,7 +75,7 @@ setMethod(
     if (!quiet) message(paste(refs, collapse = "\n"))
 
     if (!missing(file)) {
-      cat(refs, file = file)
+      cat(unlist(refs), sep = "\n", file = file)
     } else {
       invisible(refs)
     }
