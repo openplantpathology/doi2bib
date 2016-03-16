@@ -1,4 +1,4 @@
-#' Convert doi to bibtex
+#' Convert DOI to bibtex
 #'
 #' Convert a digital object identifier (DOI) string into a bibtex entry using
 #' the webservice \url{http://www.doi2bib.org}.
