@@ -4,7 +4,7 @@
 \name{doi2bib}
 \alias{doi2bib}
 \alias{doi2bib,character-method}
-\title{Convert DOI to bibtex}
+\title{Convert DOI to Bibtex}
 \usage{
 doi2bib(..., file, quiet = FALSE)
 
