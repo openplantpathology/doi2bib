@@ -3,24 +3,22 @@
 \docType{methods}
 \name{doi2bib}
 \alias{doi2bib}
-\alias{doi2bib,character,character-method}
-\alias{doi2bib,character,missing-method}
+\alias{doi2bib,character-method}
 \title{Convert doi to bibtex}
 \usage{
-doi2bib(doi, citekey)
+doi2bib(..., file, quiet = FALSE)
 
-\S4method{doi2bib}{character,missing}(doi, citekey)
-
-\S4method{doi2bib}{character,character}(doi, citekey)
+\S4method{doi2bib}{character}(..., file, quiet = FALSE)
 }
 \arguments{
-\item{doi}{The character string of the doi.}
+\item{...}{One or more character strings of the doi. If arguments are named, names will replace citekeys}
 
-\item{citekey}{Character string of equal length to \code{doi}. If used will
-replace citekeys with these values.}
+\item{file}{an optional character string. If used the bibtex references are sent to file rather than returned.}
+
+\item{quiet}{logical. Should the bibtex references be printed to the console?}
 }
 \value{
-a bibtex entry as a character string.
+a list, returned invisibly, of bibtex references as a character strings, unless a file is specified, in which case nothing is returned
 }
 \description{
 Convert a digital object identifier (doi) string into a bibtex entry using
@@ -28,12 +26,10 @@ the webservice \url{http://www.doi2bib.org}.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{doi = character,citekey = missing}: Convert doi to bibtex
-
-\item \code{doi = character,citekey = character}: Convert doi to bibtex
+\item \code{character}: Convert doi to bibtex
 }}
 \examples{
-doi2bib("10.1038/35012251")
+doi2bib(Margules2000 = "10.1038/35012251")
 
 }
 
