@@ -34,17 +34,20 @@ setGeneric(
 
 replace_citekeys <-
   function(refs, nms) {
-    mapply(
-      function(ref, nm) {
-        ifelse(
-          nchar(nm) < 1,
-          ref,
-          sub("([^\\{]+\\{)[^,]+", paste0("\\1", nm), ref)
-        )
-      },
-      refs,
-      nms,
-      SIMPLIFY = FALSE
+    setNames(
+      mapply(
+        function(ref, nm) {
+          ifelse(
+            nchar(nm) < 1,
+            ref,
+            sub("([^\\{]+\\{)[^,]+", paste0("\\1", nm), ref)
+          )
+        },
+        refs,
+        nms,
+        SIMPLIFY = FALSE
+      ),
+    nms
     )
   }
 
@@ -64,8 +67,6 @@ setMethod(
 
     dois <- c(...)
 
-    nms <- names(dois)
-
     refs <-
       lapply(
         dois,
@@ -82,6 +83,8 @@ setMethod(
           )
         }
       )
+
+    nms <- names(dois)
 
     if (!is.null(nms)) {
       refs <- replace_citekeys(refs, nms)
