@@ -64,6 +64,7 @@ setMethod(
 
     stopifnot(missing(file) || is.character(file))
     stopifnot(is.logical(quiet))
+    stopifnot(has_connection())
 
     dois <- c(...)
 
