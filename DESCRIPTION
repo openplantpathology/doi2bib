@@ -1,6 +1,6 @@
 Package: doi2bib
 Title: Convert DOI to Bibtex
-Version: 0.0.0.9009
+Version: 0.0.0.9010
 Authors@R:  c(
     person(c("William", "Keith"), "Morris", email = "wkmor1@gmail.com", role = c("aut", "cre")),
     person("John", "Baumgartner", email = "johnbaums@gmail.com", role = "aut")
@@ -13,4 +13,6 @@ Imports:
     methods
 License: MIT + file LICENSE
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests:
+    testthat,
+    covr
