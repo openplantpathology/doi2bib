@@ -32,6 +32,27 @@ setGeneric(
   signature = signature("...")
 )
 
+replace_citekeys <-
+  function(refs, nms) {
+    mapply(
+      function(ref, nm) {
+        ifelse(
+          nchar(nm) < 1,
+          ref,
+          sub("([^\\{]+\\{)[^,]+", paste0("\\1", nm), ref)
+        )
+      },
+      refs,
+      nms,
+      SIMPLIFY = FALSE
+    )
+  }
+
+refs_to_file <-
+  function(refs, file) {
+    cat(paste(refs, collapse = "\n"), file = file, append = TRUE)
+  }
+
 #'@describeIn doi2bib Convert DOI to bibtex
 setMethod(
   "doi2bib",
@@ -39,7 +60,6 @@ setMethod(
   function(..., file, quiet) {
 
     stopifnot(missing(file) || is.character(file))
-
     stopifnot(is.logical(quiet))
 
     dois <- c(...)
@@ -64,25 +84,13 @@ setMethod(
       )
 
     if (!is.null(nms)) {
-      refs <-
-        mapply(
-          function(ref, nm) {
-            ifelse(
-              nchar(nm) < 1,
-              ref,
-              sub("([^\\{]+\\{)[^,]+", paste0("\\1", nm), ref)
-            )
-          },
-          refs,
-          nms,
-          SIMPLIFY = FALSE
-        )
+      refs <- replace_citekeys(refs, nms)
     }
 
     if (!quiet) message(paste(refs, collapse = "\n"))
 
     if (!missing(file)) {
-      cat(paste(refs, collapse = "\n"), file = file)
+      refs_to_file(refs, file)
     } else {
       invisible(refs)
     }
