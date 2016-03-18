@@ -1,6 +1,6 @@
 Package: doi2bib
 Title: Convert DOI to Bibtex
-Version: 0.0.0.9013
+Version: 0.0.0.9014
 Authors@R:  c(
     person(c("William", "Keith"), "Morris", email = "wkmor1@gmail.com", role = c("aut", "cre")),
     person("John", "Baumgartner", email = "johnbaums@gmail.com", role = "aut")
