@@ -3,12 +3,13 @@ context("doi2bib")
 test_that(
   "doi2bib returns a list of the correct length",
   {
-    doi2bib:::check_connection()
+    if (!doi2bib:::has_connection()) skip("www.doi2bib.org not available")
 
     no_ref <- doi2bib("")
     invalid_ref <- doi2bib("This is not a DOI")
     ref <- doi2bib("10.1038/35012251")
     refs <- doi2bib("10.1038/35012251", "10.1111/j.1600-0587.2011.07085.x")
+    file_ref <- doi2bib("10.1038/35012251", file = tempfile())
     named_dois <- list(
       "name 1" = "10.1038/35012251",
       "name 2" = "10.1111/j.1600-0587.2011.07085.x"
@@ -24,6 +25,9 @@ test_that(
     expect_equivalent(class(ref), "list")
     expect_equivalent(length(ref), 1L)
 
+    expect_equivalent(class(file_ref), "list")
+    expect_equivalent(length(file_ref), 1L)
+
     expect_equivalent(class(refs), "list")
     expect_equivalent(length(refs), 2L)
 
@@ -35,7 +39,7 @@ test_that(
 test_that(
   "replace_citekeys is replacing the citekeys",
   {
-    doi2bib:::check_connection()
+    if (!doi2bib:::has_connection()) skip("www.doi2bib.org not available")
 
     refs <- doi2bib("10.1038/35012251", "10.1111/j.1600-0587.2011.07085.x")
     nms <- c("name 1", "name 2")
@@ -47,7 +51,7 @@ test_that(
 test_that(
   "refs_to_file is writing to a file",
   {
-    doi2bib:::check_connection()
+    if (!doi2bib:::has_connection()) skip("www.doi2bib.org not available")
 
     refs <- doi2bib("10.1038/35012251", "10.1111/j.1600-0587.2011.07085.x")
 

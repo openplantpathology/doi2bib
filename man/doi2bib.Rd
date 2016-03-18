@@ -23,8 +23,8 @@ prevented.}
 }
 \value{
 a \code{list}, returned invisibly, of bibtex references as
-  \code{character} strings, unless \code{file} is specified, in which case
-  the function returns \code{NULL} invisibly.
+  \code{character} strings, as well as writing to file if \code{file} is
+  specified.
 }
 \description{
 Convert a digital object identifier (DOI) string into a bibtex entry using

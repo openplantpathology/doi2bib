@@ -12,8 +12,8 @@
 #'   prevented.
 #'
 #' @return a \code{list}, returned invisibly, of bibtex references as
-#'   \code{character} strings, unless \code{file} is specified, in which case
-#'   the function returns \code{NULL} invisibly.
+#'   \code{character} strings, as well as writing to file if \code{file} is
+#'   specified.
 #'
 #' @importFrom httr accept content GET
 #' @importFrom methods setGeneric setMethod signature
@@ -95,8 +95,9 @@ setMethod(
 
     if (!missing(file)) {
       refs_to_file(refs, file)
-    } else {
-      invisible(refs)
     }
+
+    invisible(refs)
+
   }
 )
