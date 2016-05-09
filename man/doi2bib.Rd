@@ -6,9 +6,9 @@
 \alias{doi2bib,character-method}
 \title{Convert DOI to Bibtex}
 \usage{
-doi2bib(..., file, quiet = FALSE)
+doi2bib(..., file, append = TRUE, quiet = FALSE)
 
-\S4method{doi2bib}{character}(..., file, quiet = FALSE)
+\S4method{doi2bib}{character}(..., file, append = TRUE, quiet = FALSE)
 }
 \arguments{
 \item{...}{One or more DOIs, as \code{character} strings. If arguments are
@@ -16,6 +16,8 @@ named, names will replace default citekeys.}
 
 \item{file}{an optional \code{character} string. If used, the bibtex
 references are sent to \code{file} rather than being returned.}
+
+\item{append}{\code{logical}. Append results to file?}
 
 \item{quiet}{\code{logical}. By default, bibtex references are printed to the
 console. By setting \code{quiet} to \code{TRUE}, this behaviour will be
@@ -37,6 +39,7 @@ the webservice \url{http://www.doi2bib.org}.
 \examples{
 doi2bib(Margules2000 = "10.1038/35012251")
 doi2bib(Margules2000 = "10.1038/35012251",
-        Myers2000 = "10.1038/35002501")
+        Myers2000    = "10.1038/35002501",
+        Moilanen     = "978-0199547777")
 }
 
